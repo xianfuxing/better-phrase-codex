@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__PYTHON_CMD__ __SCRIPT_PATH__",
+            "commandWindows": "__PYTHON_CMD__ __SCRIPT_PATH__",
+            "timeout": 10,
+            "statusMessage": "Checking Better Phrase"
+          }
+        ]
+      }
+    ]
+  }
+}
