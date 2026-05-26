@@ -94,18 +94,26 @@ class HookTests(unittest.TestCase):
         parsed = json.loads(out)
         ctx = parsed["hookSpecificOutput"]["additionalContext"]
         self.assertEqual(parsed["hookSpecificOutput"]["hookEventName"], "UserPromptSubmit")
-        self.assertIn("English tip", ctx)
+        self.assertIn("✅ **Better Phrase**", ctx)
+        self.assertIn("✍️ English tip", ctx)
+        self.assertIn("🛠️ Better Phrase", ctx)
         self.assertNotIn("{timing_ms}", ctx)
 
     def test_translate_toggle_controls_chinese_output(self):
         self.suppress_hint()
         out = self.run_hook({"prompt": "请帮我检查这个项目"})
-        self.assertIn("English:", json.loads(out)["hookSpecificOutput"]["additionalContext"])
+        ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
+        self.assertIn("✅ **Better Phrase**", ctx)
+        self.assertIn("🌐 English:", ctx)
 
         bp.set_translate_enabled(False)
         self.assertEqual(self.run_hook({"prompt": "请帮我检查这个项目"}), "")
 
     def test_hint_footer_disappears_after_limit(self):
+        out = self.run_hook({"prompt": "how are you today"})
+        ctx = json.loads(out)["hookSpecificOutput"]["additionalContext"]
+        self.assertIn("💡 Chinese translation is on by default", ctx)
+
         for _ in range(bp.HINT_LIMIT):
             self.run_hook({"prompt": "how are you today"})
 

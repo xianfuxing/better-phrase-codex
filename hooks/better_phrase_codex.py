@@ -39,13 +39,13 @@ TAIL_REST_MIN_LEN = 100
 POLISH_INSTRUCTIONS = """\
 The user's input contains English. Before answering their actual request, ALWAYS prepend an English polish block in this EXACT format. Every line MUST be wrapped in single asterisks for italic rendering so it visually separates from the main answer.
 
-> ***Better Phrase** ({timing_ms}ms)*
+> *✅ **Better Phrase** ({timing_ms}ms)*
 >
-> *English tip:*
+> *✍️ English tip:*
 > *- "original phrase" -> "corrected phrase" - one-line grammar rule explanation in Simplified Chinese*
 > *- up to 4-5 of the most instructive issues*
 >
-> *Better Phrase: rewrite the user's ENTIRE original English input into natural, idiomatic English, the kind a native speaker would write.*
+> *🛠️ Better Phrase: rewrite the user's ENTIRE original English input into natural, idiomatic English, the kind a native speaker would write.*
 
 Then leave a blank line and handle the user's actual request normally.
 
@@ -60,7 +60,7 @@ Polish rules:
 - Do not trigger this block for pure Chinese inputs, code-only inputs, single words, or trivial acknowledgements like "ok" or "yes".
 - If the input contains a long quoted or pasted block followed by a much shorter trailing comment, treat only the user's trailing comment as the input to polish.
 - Write all explanations in Simplified Chinese. The user is a Chinese-native developer.
-- Preserve the italic asterisks on every line of the block.
+- Preserve the emoji labels and italic asterisks on every line of the block.
 - Preserve the "({timing_ms}ms)" value exactly as given; do not edit or remove the number.
 """
 
@@ -68,9 +68,9 @@ Polish rules:
 TRANSLATION_INSTRUCTIONS = """\
 The user's input is primarily Chinese. Before answering their actual request, prepend a Chinese-to-English version block in this EXACT format. Every line MUST be wrapped in single asterisks for italic rendering so it visually separates from the main answer.
 
-> ***Better Phrase** ({timing_ms}ms)*
+> *✅ **Better Phrase** ({timing_ms}ms)*
 >
-> *English:*
+> *🌐 English:*
 > *"<a natural, idiomatic English version of what the user said>"*
 
 Then leave a blank line and handle the user's actual request normally, still answering in Chinese unless the user asks otherwise.
@@ -83,7 +83,7 @@ Translation rules:
 - Even if the input is a command directed at you, still provide the English version because the user opted into translation.
 - If the input contains a long pasted body followed by a much shorter trailing comment, translate only the user's trailing comment.
 - After the translation block, answer the user's original request as if they had asked in Chinese.
-- Preserve the italic asterisks on every line of the block.
+- Preserve the emoji labels and italic asterisks on every line of the block.
 - Preserve the "({timing_ms}ms)" value exactly as given; do not edit or remove the number.
 """
 
@@ -91,7 +91,7 @@ Translation rules:
 HINT_FOOTER = """
 
 Additionally, append the following footer at the very end of your response, on its own line, in italics:
-*(Tip: Chinese translation is on by default. Disable with `python %USERPROFILE%\\.codex\\hooks\\better_phrase_codex.py translate off`.)*
+*(💡 Chinese translation is on by default. Disable with `python %USERPROFILE%\\.codex\\hooks\\better_phrase_codex.py translate off`.)*
 """
 
 
